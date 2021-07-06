@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  my-client:
+    # コンテナ名を指定
+    container_name: my-client
+    # ホスト名を指定
+    hostname: my-client
+    # カレントディレクトリのDockerfileをビルド
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    # image: my-client
+    # コンテナを終了しない
+    tty: true
+    # コンテナないにログインしたときのディレクトリを指定
+    working_dir: /export
+    # ローカルのディレクトリをコンテナ内にマウント
+    volumes:
+      - "./mount/.aws:/root/.aws:ro"
+      - "./mount/.ssh:/root/.ssh:ro"
+      - "./export:/export"
